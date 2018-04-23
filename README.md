@@ -1,14 +1,18 @@
-Untitled
+Tidy Tuesday Week 4
 ================
+Felipe Flores
 
 Import Data
 ===========
 
 ``` r
 data <- read_csv(file = "week4_australian_salary.csv") %>% 
+# The dataset for some reason included some \x96 and \x92 characters that I simply replaced
   mutate(occupation = str_replace(occupation, pattern = "\x96", replacement = "-")) %>% 
   mutate(occupation = str_replace(occupation, pattern = "\x92", replacement = "")) %>% 
+# Then I arrange by gender and income
   arrange(gender, desc(average_taxable_income)) %>% 
+# And let's only use these variables
   select(c(occupation, gender, average_taxable_income))
 ```
 
@@ -23,9 +27,8 @@ top_jobs <- data %>%
   top_n(50)
 ```
 
-    ## Selecting by average_taxable_income
-
-So here is the table for females
+Female top 50 jobs
+------------------
 
 ``` r
 top_jobs %>% 
@@ -34,61 +37,61 @@ top_jobs %>%
   knitr::kable()
 ```
 
-    ## Adding missing grouping variables: `gender`
+| gender | occupation                                                                                                       |  average\_taxable\_income|
+|:-------|:-----------------------------------------------------------------------------------------------------------------|-------------------------:|
+| Female | Judge - law                                                                                                      |                    355844|
+| Female | Neurosurgeon                                                                                                     |                    323682|
+| Female | Plastic and reconstructive surgeon                                                                               |                    281608|
+| Female | Futures trader                                                                                                   |                    281600|
+| Female | Vascular surgeon                                                                                                 |                    271529|
+| Female | Gynaecologist; Obstetrician                                                                                      |                    264628|
+| Female | Gastroenterologist                                                                                               |                    260925|
+| Female | Magistrate                                                                                                       |                    260161|
+| Female | Anaesthetist                                                                                                     |                    243582|
+| Female | Ophthalmologist                                                                                                  |                    217242|
+| Female | Cardiologist                                                                                                     |                    215920|
+| Female | Urologist                                                                                                        |                    213094|
+| Female | Surgeon - general                                                                                                |                    210796|
+| Female | Medical oncologist                                                                                               |                    208612|
+| Female | Specialist physicians - other                                                                                    |                    207599|
+| Female | Specialist physician - general medicine                                                                          |                    207225|
+| Female | Otorhinolaryngologist                                                                                            |                    200136|
+| Female | Dermatologist                                                                                                    |                    195030|
+| Female | Diagnostic and interventional radiologist                                                                        |                    180695|
+| Female | Cardiothoracic surgeon                                                                                           |                    175500|
+| Female | Paediatric surgeon                                                                                               |                    175314|
+| Female | Endocrinologist                                                                                                  |                    174542|
+| Female | Member of parliament                                                                                             |                    173331|
+| Female | Rheumatologist                                                                                                   |                    169409|
+| Female | Intensive care specialist                                                                                        |                    169369|
+| Female | Emergency medicine specialist                                                                                    |                    165786|
+| Female | Orthopaedic surgeon                                                                                              |                    159479|
+| Female | Neurologist                                                                                                      |                    155217|
+| Female | Renal medicine specialist                                                                                        |                    155133|
+| Female | Psychiatrist                                                                                                     |                    152437|
+| Female | Clinical haematologist                                                                                           |                    147970|
+| Female | Paediatrician                                                                                                    |                    147347|
+| Female | Securities and finance dealer                                                                                    |                    145208|
+| Female | Dental specialist                                                                                                |                    140505|
+| Female | Actuary                                                                                                          |                    136819|
+| Female | Radiation oncologist                                                                                             |                    135678|
+| Female | Financial investment manager                                                                                     |                    134481|
+| Female | Petroleum engineer                                                                                               |                    133315|
+| Female | Mining production manager                                                                                        |                    133061|
+| Female | General medical practitioner                                                                                     |                    129834|
+| Female | Thoracic medicine specialist                                                                                     |                    127645|
+| Female | Stock exchange dealer; Stockbroker                                                                               |                    124433|
+| Female | Paving plant operator                                                                                            |                    123281|
+| Female | Mining engineer                                                                                                  |                    119564|
+| Female | Tribunal member                                                                                                  |                    119219|
+| Female | Doctor - medical practitioner other; Occupational medicine specialist; Public health physician; Sports physician |                    118310|
+| Female | Geophysicist                                                                                                     |                    117575|
+| Female | Chief executive officer; Executive director; Managing director; Public servant - secretary or deputy secretary   |                    116855|
+| Female | Engineering manager                                                                                              |                    116732|
+| Female | Metallurgist                                                                                                     |                    110359|
 
-| gender    | occupation                                                                                                       |  average\_taxable\_income|
-|:----------|:-----------------------------------------------------------------------------------------------------------------|-------------------------:|
-| Female    | Judge - law                                                                                                      |                    355844|
-| Female    | Neurosurgeon                                                                                                     |                    323682|
-| Female    | Plastic and reconstructive surgeon                                                                               |                    281608|
-| Female    | Futures trader                                                                                                   |                    281600|
-| Female    | Vascular surgeon                                                                                                 |                    271529|
-| Female    | Gynaecologist; Obstetrician                                                                                      |                    264628|
-| Female    | Gastroenterologist                                                                                               |                    260925|
-| Female    | Magistrate                                                                                                       |                    260161|
-| Female    | Anaesthetist                                                                                                     |                    243582|
-| Female    | Ophthalmologist                                                                                                  |                    217242|
-| Female    | Cardiologist                                                                                                     |                    215920|
-| Female    | Urologist                                                                                                        |                    213094|
-| Female    | Surgeon - general                                                                                                |                    210796|
-| Female    | Medical oncologist                                                                                               |                    208612|
-| Female    | Specialist physicians - other                                                                                    |                    207599|
-| Female    | Specialist physician - general medicine                                                                          |                    207225|
-| Female    | Otorhinolaryngologist                                                                                            |                    200136|
-| Female    | Dermatologist                                                                                                    |                    195030|
-| Female    | Diagnostic and interventional radiologist                                                                        |                    180695|
-| Female    | Cardiothoracic surgeon                                                                                           |                    175500|
-| Female    | Paediatric surgeon                                                                                               |                    175314|
-| Female    | Endocrinologist                                                                                                  |                    174542|
-| Female    | Member of parliament                                                                                             |                    173331|
-| Female    | Rheumatologist                                                                                                   |                    169409|
-| Female    | Intensive care specialist                                                                                        |                    169369|
-| Female    | Emergency medicine specialist                                                                                    |                    165786|
-| Female    | Orthopaedic surgeon                                                                                              |                    159479|
-| Female    | Neurologist                                                                                                      |                    155217|
-| Female    | Renal medicine specialist                                                                                        |                    155133|
-| Female    | Psychiatrist                                                                                                     |                    152437|
-| Female    | Clinical haematologist                                                                                           |                    147970|
-| Female    | Paediatrician                                                                                                    |                    147347|
-| Female    | Securities and finance dealer                                                                                    |                    145208|
-| Female    | Dental specialist                                                                                                |                    140505|
-| Female    | Actuary                                                                                                          |                    136819|
-| Female    | Radiation oncologist                                                                                             |                    135678|
-| Female    | Financial investment manager                                                                                     |                    134481|
-| Female    | Petroleum engineer                                                                                               |                    133315|
-| Female    | Mining production manager                                                                                        |                    133061|
-| Female    | General medical practitioner                                                                                     |                    129834|
-| Female    | Thoracic medicine specialist                                                                                     |                    127645|
-| Female    | Stock exchange dealer; Stockbroker                                                                               |                    124433|
-| Female    | Paving plant operator                                                                                            |                    123281|
-| Female    | Mining engineer                                                                                                  |                    119564|
-| Female    | Tribunal member                                                                                                  |                    119219|
-| Female    | Doctor - medical practitioner other; Occupational medicine specialist; Public health physician; Sports physician |                    118310|
-| Female    | Geophysicist                                                                                                     |                    117575|
-| Female    | Chief executive officer; Executive director; Managing director; Public servant - secretary or deputy secretary   |                    116855|
-| Female    | Engineering manager                                                                                              |                    116732|
-| Female    | Metallurgist                                                                                                     |                    110359|
-| And males |                                                                                                                  |                          |
+Male top 50 jobs
+----------------
 
 ``` r
 top_jobs %>% 
@@ -156,27 +159,26 @@ Graphing
 ========
 
 ``` r
-data %>%   
+data %>%
+  # Scale by hundred thousand dollars
   mutate(income = average_taxable_income/100000) %>%
+  # Select the top 10 per gender
   group_by(gender) %>% 
   top_n(10) %>% 
+  # Create a rank for the plot
   mutate(rank = rank(income)) %>% 
+  # This is so genders are split left and right
   mutate(income = ifelse(test = gender == "Female", yes = -income, no = income)) %>% 
-  ggplot(aes(x = rank, y = income,
-             fill = gender,
-             ymin = -6,
-             ymax = 8.5
-  )) +
+  ggplot(aes(x = rank, y = income, fill = gender, ymin = -6, ymax = 8.5)) +
   geom_col() +
-  geom_text(aes(x = rank,y = 0.5*income,
-  label = occupation
-  ), size = 1.8) +
-  geom_label(aes(
-    x = rank,
-    y = ifelse(test = gender == "Female", 1.5 * income, 1.3 * income),
-    label = paste("$", format(100000 * abs(income), big.mark = ","))
-  ), fill = "white") +
-  xlab("Gender") +
+  geom_text(aes(x = rank,y = 0.5*income, label = occupation), size = 1.8) +
+  geom_label(
+    aes(
+      x = rank,
+      y = ifelse(test = gender == "Female", 1.5 * income, 1.3 * income),
+      label = paste("$", format(100000 * abs(income), big.mark = ","))
+    ), 
+    fill = "white") +
   ylab("Average Taxable Income (Hundreds of Thousands of Dollars)") +
   labs(title = "Top 10 Highest-Paid Occupations", fill = "Gender") +
   scale_y_continuous(labels = abs) +
@@ -187,12 +189,8 @@ data %>%
         axis.ticks.y = element_blank()) 
 ```
 
-    ## Selecting by income
-
 ![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ``` r
 ggsave(filename = "plot1.png", device = "png", plot = last_plot())
 ```
-
-    ## Saving 7 x 5 in image
